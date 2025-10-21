@@ -55,3 +55,36 @@ Manus operates within a sandboxed virtual machine environment with the following
 *   **Programming Environments**: Python 3.11.0rc1 (with `pip3` and common libraries like `pandas`, `numpy`, `requests`, `openai`) and Node.js 22.13.0 (with `pnpm`, `yarn`).
 *   **Browser Environment**: Chromium stable with login and cookie persistence enabled.
 *   **GitHub Integration**: Pre-configured GitHub CLI (`gh`) for seamless interaction with GitHub repositories.
+
+
+## 5. Mantus Project Structure (Initial Blueprint)
+
+To begin the development of Mantus, an initial project structure has been established, mirroring the conceptual components of Manus AI. This structure includes:
+
+```
+Mantus/
+├── core/
+│   ├── main.py                 # Main execution logic for Mantus
+│   ├── task_manager.py         # Manages task planning and phase advancement
+│   └── communication_manager.py # Handles user interaction and messaging
+├── tools/
+│   ├── system/
+│   │   ├── shell_tool.py       # Placeholder for shell command execution
+│   │   └── file_tool.py        # Placeholder for file system operations
+│   │   └── match_tool.py       # Placeholder for file and content matching
+│   ├── web/
+│   │   ├── search_tool.py      # Placeholder for external information search
+│   │   └── browser_tool.py     # Placeholder for web browsing capabilities
+│   └── specialized/
+│       ├── schedule_tool.py    # Placeholder for task scheduling
+│       ├── expose_tool.py      # Placeholder for port exposure
+│       ├── generate_tool.py    # Placeholder for media generation
+│       ├── slides_tool.py      # Placeholder for presentation creation
+│       └── webdev_tool.py      # Placeholder for web development project initialization
+└── environment/
+    ├── python/                 # Configuration and setup for Python environment
+    ├── nodejs/                 # Configuration and setup for Node.js environment
+    └── browser/                # Configuration and setup for browser environment
+```
+
+This structure provides a foundational framework for implementing each of the functionalities described above, with placeholder files indicating where the logic for each tool and core component would reside. The goal is to develop these components to replicate the robust capabilities of Manus AI within the Mantus project.
