@@ -215,5 +215,17 @@ Periodically update the model based on collected feedback:
 
 Building a state-of-the-art LLM like the one powering Mantus is a complex, resource-intensive endeavor. However, with careful planning, substantial computational resources, and expertise in machine learning, it is achievable. This guide provides the roadmap; the execution will require a dedicated team of researchers and engineers.
 
-For those without the resources to train from scratch, consider starting with a pre-trained open-source model (e.g., Llama, Mistral) and fine-tuning it for Mantus's specific use cases. This approach can yield impressive results with a fraction of the computational cost.
+### 7.1 Leveraging Open-Source LLMs for Mantus
+
+For Mantus, leveraging existing powerful open-source LLMs is a highly recommended and efficient approach, especially for initial development and iteration. As detailed in the `open_source_llm_comparison.md` document, models like **Llama 3.1**, **Qwen3**, and **DeepSeek-V3** offer robust foundations with strong agentic capabilities, extensive context windows, and multilingual support.
+
+Instead of training a foundational model from scratch, the development process for Mantus can begin by:
+
+1.  **Selecting a Base Model**: Choose one of the recommended open-source LLMs based on Mantus's primary requirements (e.g., Llama 3.1 for general agentic performance, Qwen3 for multilingual and hybrid thinking, DeepSeek-V3 for strong reasoning).
+2.  **Fine-tuning**: Apply instruction fine-tuning and tool-use fine-tuning (as described in Section 2) to adapt the chosen base model to Mantus's specific interaction patterns and toolset.
+3.  **RLHF**: Implement Reinforcement Learning from Human Feedback (Section 3) to align the model with Mantus's desired behaviors, safety guidelines, and user preferences.
+
+This approach significantly reduces the initial computational cost and time-to-deployment while still allowing for deep customization and performance optimization. A hybrid strategy, combining a powerful general-purpose LLM with specialized smaller models (e.g., CodeGemma for coding tasks), can further enhance Mantus's capabilities.
+
+
 

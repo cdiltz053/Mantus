@@ -40,6 +40,10 @@ To truly mirror the capabilities of Manus AI, Mantus requires a foundational Lar
 
 #### 1.3.1 Model Type: Transformer Architecture
 
+For Mantus, a **decoder-only autoregressive architecture** is recommended, as it aligns well with the agent loop's need for sequential reasoning and response generation. While the internal workings of such models are complex, several open-source options provide excellent starting points or can be fine-tuned to serve as Mantus's core. A detailed comparison and recommendations for these models are provided in the `open_source_llm_comparison.md` document.
+
+
+
 The most effective LLMs today are built upon the **Transformer architecture** [1]. This architecture is particularly well-suited for sequence-to-sequence tasks, such as language translation, text summarization, and natural language understanding/generation. Key characteristics include:
 
 *   **Self-Attention Mechanism**: Allows the model to weigh the importance of different words in the input sequence relative to each other, capturing long-range dependencies.
@@ -72,7 +76,7 @@ Training an LLM of this magnitude involves several stages:
 
 #### 1.3.4 Integration with Agent Loop
 
-The LLM will be integrated into Mantus's agent loop as the primary "Think" component. It will:
+Regardless of whether a foundational LLM is trained from scratch or an existing open-source model is adopted, its integration into Mantus's agent loop as the primary "Think" component remains crucial. The LLM will:
 
 1.  **Interpret User Input**: Understand the user's request and current context.
 2.  **Reason and Plan**: Formulate a high-level plan to achieve the user's goal, breaking it down into sub-tasks.
@@ -81,9 +85,31 @@ The LLM will be integrated into Mantus's agent loop as the primary "Think" compo
 5.  **Process Tool Output**: Interpret the observations received from tool execution and update the internal state.
 6.  **Generate Responses**: Formulate natural language responses to the user, providing updates, asking clarifying questions, or delivering results.
 
+### 1.3.5 Recommended Open-Source LLMs for Mantus
+
+For Mantus to truly mirror Manus's comprehensive capabilities, a careful selection of its core Large Language Model (LLM) is paramount. Based on extensive research and comparative analysis (detailed in `open_source_llm_comparison.md`), the following open-source LLMs are highly recommended:
+
+1.  **Llama 3.1 [1]**: Offers frontier-level performance, explicit agentic focus, deep customization potential, and an extensive 128K context window. Its robust foundation makes it ideal for general-purpose agentic AI.
+2.  **Qwen3 [3]**: Stands out for its strong agentic optimizations, including hybrid thinking modes for efficiency, and unparalleled multilingual support (119 languages). It is particularly well-suited for agents that need to intelligently manage reasoning processes and interact globally.
+3.  **DeepSeek-V3 [2]**: Provides exceptional reasoning capabilities, especially in technical domains like coding and mathematics, coupled with an efficient Mixture-of-Experts (MoE) architecture. This is an excellent choice if Mantus is expected to perform complex analytical and problem-solving tasks.
+
+A hybrid approach, utilizing one of these powerful LLMs as the primary reasoning engine and integrating specialized smaller models (e.g., CodeGemma or PaliGemma 2 [5]) as dedicated tools for specific tasks, could offer the most comprehensive solution. The ultimate choice will depend on available computational resources and the desired weighting of Mantus's capabilities.
+
+
+
+Regardless of whether a foundational LLM is trained from scratch or an existing open-source model is adopted, its integration into Mantus's agent loop as the primary "Think" component remains crucial. The LLM will:
+
 ## References
 
-[1] Vaswani, A., Shazeer, N., Parmar, N., Uszkoreit, J., Jones, L., Gomez, A. N., Kaiser, Ł., & Polosukhin, I. (2017). Attention Is All You Need. *Advances in Neural Information Processing Systems*, 30. [https://proceedings.neurips.cc/paper/2017/file/3f5ee243547dee91fbd053c1c4a845aa-Paper.pdf](https://proceedings.neurips.cc/paper/2017/file/3f5ee243547dee91fbd053c1c4a845aa-Paper.pdf)
+[1] Vaswani, A., Shazeer, N., Parmar, N., Uszkoreit, J., Jones, L., Gomez, A. N., Kaiser, Ł., & Polosukhin, I. (2017). Attention Is All You Need. *Advances in Neural Information Processing Systems*, 30. [https://proceedings.neurips.cc/paper/2017/file/3f5ee243547dee91fbd053c1c4a845aa-Paper.pdf]
+[2] deepseek-ai. (n.d.). *deepseek-ai/DeepSeek-V3*. Hugging Face. [https://huggingface.co/deepseek-ai/DeepSeek-V3](https://huggingface.co/deepseek-ai/DeepSeek-V3)
+[3] Qwen. (2025, April 29). *Qwen3: Think Deeper, Act Faster*. [https://qwenlm.github.io/blog/qwen3/](https://qwenlm.github.io/blog/qwen3/)
+[4] mistralai. (n.d.). *mistralai/Mixtral-8x7B-v0.1*. Hugging Face. [https://huggingface.co/mistralai/Mixtral-8x7B-v0.1](https://huggingface.co/mistralai/Mixtral-8x7B-v0.1)
+[5] Google AI for Developers. (n.d.). *Gemma models overview*. [https://ai.google.dev/gemma/docs](https://ai.google.dev/gemma/docs)
+
+## 2. Tool Integration
+
+Mantus integrates with a comprehensive suite of tools, organized into four categories:)
 
 
 
