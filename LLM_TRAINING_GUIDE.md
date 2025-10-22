@@ -211,11 +211,44 @@ Periodically update the model based on collected feedback:
 *   **RLHF Iterations**: Conduct additional RLHF rounds to further align the model with human preferences.
 *   **Version Management**: Maintain versioning of models to allow rollback if issues arise.
 
-## 7. Conclusion
+
+When adopting an open-source LLM for Mantus, the focus shifts from pre-training a foundational model to effectively fine-tuning and aligning it with Mantus's specific operational requirements and desired behaviors. This involves:
+
+*   **Instruction Fine-tuning**: Training the chosen LLM on a dataset of instruction-response pairs to enhance its ability to follow commands, generate appropriate tool arguments, and provide coherent explanations.
+*   **Domain Adaptation**: Further fine-tuning on domain-specific data relevant to Mantus's tasks (e.g., technical documentation, code snippets, interaction logs) to improve its performance in specialized areas.
+
+### 7.2 Reinforcement Learning from Human Feedback (RLHF) and Continuous Learning
+
+RLHF is crucial for aligning Mantus's LLM with human preferences and ensuring it operates safely, helpfully, and honestly. For Mantus, RLHF will be extended to support continuous learning and self-correction, addressing the limitations of Manus AI.
+
+*   **Reward Model**: Develop a reward model that learns from human feedback on Mantus's actions, tool usage, and overall task completion. This model will assign a score to Mantus's behavior, guiding the LLM towards more desirable outcomes.
+*   **Reinforcement Learning Algorithms**: Utilize algorithms like **Proximal Policy Optimization (PPO)** [8] to update the LLM's policy based on the reward model. PPO is particularly suitable for continuous control and has proven effective in LLM alignment.
+*   **Continuous Learning Loop**: Implement a feedback loop where successful and unsuccessful task executions, along with human corrections, continuously update the reward model and fine-tune the LLM. This enables Mantus to adapt and improve its strategies over time, especially in tool selection and argument generation.
+
+## 8. Integration with Enhanced Capabilities
+
+To support Mantus's advanced functionalities, the LLM training and integration strategy must account for its enhanced long-term memory, proactive planning, and self-correction mechanisms.
+
+### 8.1 Memory Integration
+
+*   **Vector Database Interaction**: The LLM will be trained to effectively query and interpret information retrieved from the vector database. This includes understanding how to formulate queries for semantic search and integrating retrieved context into its reasoning process.
+*   **Knowledge Graph Interaction**: Training will also focus on enabling the LLM to interact with the knowledge graph, both for querying structured facts and potentially for updating the graph with new information or relationships learned during tasks.
+
+### 8.2 Planning and Simulation
+
+*   **Hierarchical Planning**: The LLM will be trained to generate and execute hierarchical plans, breaking down complex goals into manageable sub-goals and dynamically adjusting plans based on execution feedback.
+*   **Simulation Feedback**: Training will incorporate experiences from the internal simulation environment, allowing the LLM to learn from simulated actions and refine its decision-making without real-world consequences.
+
+### 8.3 Meta-Learning and Self-Correction
+
+*   **Tool Use Adaptation**: The RLHF process will be extended to include meta-learning, where the LLM learns to adapt its tool-use strategies based on the outcomes of past invocations. This involves learning to recognize when a tool is failing and how to dynamically adjust its approach or select alternative tools.
+*   **Experimentation**: The LLM will be trained to leverage the experimentation framework, systematically exploring new strategies when faced with novel problems and incorporating the results into its learning process.
+
+By carefully designing the training regimen and integration points, Mantus's core LLM will be equipped to leverage its enhanced capabilities, leading to a more autonomous, intelligent, and adaptable AI agent.
+
+## 9. Conclusion
 
 Building a state-of-the-art LLM like the one powering Mantus is a complex, resource-intensive endeavor. However, with careful planning, substantial computational resources, and expertise in machine learning, it is achievable. This guide provides the roadmap; the execution will require a dedicated team of researchers and engineers.
-
-### 7.1 Leveraging Open-Source LLMs for Mantus
 
 For Mantus, leveraging existing powerful open-source LLMs is a highly recommended and efficient approach, especially for initial development and iteration. As detailed in the `open_source_llm_comparison.md` document, models like **Llama 3.1**, **Qwen3**, and **DeepSeek-V3** offer robust foundations with strong agentic capabilities, extensive context windows, and multilingual support.
 
