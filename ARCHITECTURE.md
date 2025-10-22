@@ -34,7 +34,60 @@ Coordinates the invocation of various tools based on the current task and phase.
 #### ContextManager
 Maintains the current context, including task history, previous observations, and state information. This allows Mantus to reason about decisions and maintain continuity across iterations.
 
-## 2. Tool Integration
+### 1.3 Large Language Model (LLM) Architecture (The "Neural Heart")
+
+To truly mirror the capabilities of Manus AI, Mantus requires a foundational Large Language Model (LLM) as its core intelligence. This LLM will be responsible for understanding natural language, generating responses, reasoning about tasks, and facilitating tool selection. Given the user's commitment to providing extensive resources, the design will focus on a state-of-the-art, transformer-based architecture.
+
+#### 1.3.1 Model Type: Transformer Architecture
+
+The most effective LLMs today are built upon the **Transformer architecture** [1]. This architecture is particularly well-suited for sequence-to-sequence tasks, such as language translation, text summarization, and natural language understanding/generation. Key characteristics include:
+
+*   **Self-Attention Mechanism**: Allows the model to weigh the importance of different words in the input sequence relative to each other, capturing long-range dependencies.
+*   **Positional Encoding**: Adds information about the relative or absolute position of tokens in the sequence, as the self-attention mechanism itself is permutation-invariant.
+*   **Encoder-Decoder Structure (or Decoder-only)**: While the original Transformer had both, many modern LLMs (especially for generation) use a decoder-only stack of layers.
+
+#### 1.3.2 Core Components of the LLM
+
+An LLM of this scale typically comprises the following high-level components:
+
+*   **Tokenization Layer**: Converts raw text into numerical tokens that the model can process. This involves:
+    *   **Tokenizer**: Breaks down text into subword units (e.g., Byte-Pair Encoding (BPE), WordPiece, SentencePiece).
+    *   **Vocabulary**: A mapping of tokens to unique integer IDs.
+    *   **Embedding Layer**: Converts token IDs into continuous vector representations (embeddings) that capture semantic meaning.
+
+*   **Transformer Blocks (Layers)**: The core computational units of the LLM. Each block typically contains:
+    *   **Multi-Head Self-Attention**: Computes attention weights across different "heads" to capture diverse relationships between tokens.
+    *   **Feed-Forward Networks**: Position-wise fully connected feed-forward networks applied to each position independently.
+    *   **Residual Connections and Layer Normalization**: Used to stabilize training and improve gradient flow through deep networks.
+
+*   **Output Layer**: Transforms the final hidden states from the Transformer blocks into a probability distribution over the vocabulary, typically using a linear layer followed by a softmax activation function.
+
+#### 1.3.3 Training Regimen
+
+Training an LLM of this magnitude involves several stages:
+
+*   **Pre-training**: The model is trained on a massive corpus of text (and potentially other modalities like code, images, audio) using self-supervised objectives, such as predicting the next word or filling in masked words. This phase is computationally intensive and aims to learn general language understanding and generation capabilities.
+*   **Fine-tuning (Optional but Recommended)**: After pre-training, the model can be fine-tuned on smaller, task-specific datasets to adapt it for particular applications (e.g., instruction following, summarization, question answering). This often involves supervised learning with labeled data.
+*   **Reinforcement Learning from Human Feedback (RLHF) (Optional but Highly Effective)**: A crucial step for aligning the model with human preferences and making it more helpful, harmless, and honest. This involves training a reward model based on human rankings of model outputs, and then using reinforcement learning to optimize the LLM against this reward model.
+
+#### 1.3.4 Integration with Agent Loop
+
+The LLM will be integrated into Mantus's agent loop as the primary "Think" component. It will:
+
+1.  **Interpret User Input**: Understand the user's request and current context.
+2.  **Reason and Plan**: Formulate a high-level plan to achieve the user's goal, breaking it down into sub-tasks.
+3.  **Tool Selection**: Based on the current sub-task, select the most appropriate tool from Mantus's available toolset.
+4.  **Tool Argument Generation**: Generate the necessary arguments for the selected tool based on the current context and task requirements.
+5.  **Process Tool Output**: Interpret the observations received from tool execution and update the internal state.
+6.  **Generate Responses**: Formulate natural language responses to the user, providing updates, asking clarifying questions, or delivering results.
+
+## References
+
+[1] Vaswani, A., Shazeer, N., Parmar, N., Uszkoreit, J., Jones, L., Gomez, A. N., Kaiser, Ł., & Polosukhin, I. (2017). Attention Is All You Need. *Advances in Neural Information Processing Systems*, 30. [https://proceedings.neurips.cc/paper/2017/file/3f5ee243547dee91fbd053c1c4a845aa-Paper.pdf](https://proceedings.neurips.cc/paper/2017/file/3f5ee243547dee91fbd053c1c4a845aa-Paper.pdf)
+
+
+
+
 
 Mantus integrates with a comprehensive suite of tools, organized into four categories:
 
